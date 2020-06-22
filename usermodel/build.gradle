@@ -44,6 +44,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation project(path: ':common')
     implementation project(path: ':core')
+    implementation project(path: ':net')
 }
 repositories {
     mavenCentral()

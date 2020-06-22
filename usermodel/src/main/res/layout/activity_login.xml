@@ -29,5 +29,10 @@
             android:text="登陆"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <Button
+            android:onClick="@{login::changerUrl}"
+            android:text="改变url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </layout>
