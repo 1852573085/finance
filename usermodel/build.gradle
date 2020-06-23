@@ -45,6 +45,7 @@ dependencies {
     implementation project(path: ':common')
     implementation project(path: ':core')
     implementation project(path: ':net')
+    implementation project(path: ':storage')
 }
 repositories {
     mavenCentral()

@@ -22,6 +22,7 @@ import io.reactivex.FlowableSubscriber;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
@@ -30,86 +31,18 @@ import retrofit2.Response;
 
 public class UserModel implements IModel {
     public LiveData<BaseReposenEntity<UserEntity>> login(final UserEntity userEntity){
-        final MutableLiveData<BaseReposenEntity<UserEntity>> mutableLiveData = new MutableLiveData<>();
-        Flowable<BaseReposenEntity<UserEntity>> flowable = Flowable.create(new FlowableOnSubscribe<BaseReposenEntity<UserEntity>>() {
-            @Override
-            public void subscribe(final FlowableEmitter<BaseReposenEntity<UserEntity>> emitter) throws Exception {
-                UserApi userApi = RetrofitManager.getInstance().create(UserApi.class);
-                Call<BaseReposenEntity<UserEntity>> call = userApi.login(userEntity);
-                call.enqueue(new Callback<BaseReposenEntity<UserEntity>>() {
-                    @Override
-                    public void onResponse(Call<BaseReposenEntity<UserEntity>> call, Response<BaseReposenEntity<UserEntity>> response) {
-                        emitter.onNext(response.body());
-                    }
-
-                    @Override
-                    public void onFailure(Call<BaseReposenEntity<UserEntity>> call, Throwable t) {
-                        emitter.onError(t);
-                    }
-                });
-            }
-        }, BackpressureStrategy.LATEST);
-
-        flowable.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new FlowableSubscriber<BaseReposenEntity<UserEntity>>() {
-                    @Override
-                    public void onSubscribe(Subscription s) {
-                        s.request(Long.MAX_VALUE);
-                    }
-
-                    @Override
-                    public void onNext(BaseReposenEntity<UserEntity> userEntityBaseReposenEntity) {
-                        mutableLiveData.postValue(userEntityBaseReposenEntity);
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+        UserApi userApi = RetrofitManager.getInstance().create(UserApi.class);
+        LiveData<BaseReposenEntity<UserEntity>> data = userApi.login(userEntity);
 //        Observable<BaseReposenEntity<UserEntity>> observable = Observable.create(new ObservableOnSubscribe<BaseReposenEntity<UserEntity>>() {
-//
 //            @Override
-//            public void subscribe(final ObservableEmitter<BaseReposenEntity<UserEntity>> emitter) throws Exception {
-//                UserApi userApi = RetrofitManager.getInstance().create(UserApi.class);
-//                Call<BaseReposenEntity<UserEntity>> call = userApi.login(userEntity);
-//                call.enqueue(new Callback<BaseReposenEntity<UserEntity>>() {
-//                    @Override
-//                    public void onResponse(Call<BaseReposenEntity<UserEntity>> call, Response<BaseReposenEntity<UserEntity>> response) {
-//                        emitter.onNext(response.body());
-//                    }
+//            public void subscribe(ObservableEmitter<BaseReposenEntity<UserEntity>> emitter) throws Exception {
 //
-//                    @Override
-//                    public void onFailure(Call<BaseReposenEntity<UserEntity>> call, Throwable t) {
-//                        emitter.onError(t);
-//                    }
-//                });
+//                emitter.onNext(data.getValue());
 //            }
 //        });
-//        BaseObservable.doObserver(new BaseObserver<BaseReposenEntity<UserEntity>>(){
-//            @Override
-//            public void onNext(BaseReposenEntity<UserEntity> userEntityBaseReposenEntity) {
-//                super.onNext(userEntityBaseReposenEntity);
-//                mutableLiveData.postValue(userEntityBaseReposenEntity);
-//            }
+
+        //BaseObservable.doObserver(new BaseObserver<BaseReposenEntity<UserEntity>>(),observable);
 //
-//            @Override
-//            public void onError(Throwable e) {
-//                super.onError(e);
-//                mutableLiveData.postValue(null);
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                super.onComplete();
-//            }
-//        },observable);
-        return mutableLiveData;
+        return data;
     }
 }

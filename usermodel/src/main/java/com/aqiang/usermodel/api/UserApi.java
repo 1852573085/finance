@@ -1,5 +1,7 @@
 package com.aqiang.usermodel.api;
 
+import android.arch.lifecycle.LiveData;
+
 import com.aqiang.net.BaseReposenEntity;
 import com.aqiang.net.Config;
 import com.aqiang.usermodel.entity.UserEntity;
@@ -15,5 +17,5 @@ public interface UserApi {
     Call<UserEntity> changer();
 
     @POST("api/User/login")
-    Call<BaseReposenEntity<UserEntity>> login(@Body UserEntity userEntity);
+    LiveData<BaseReposenEntity<UserEntity>> login(@Body UserEntity userEntity);
 }

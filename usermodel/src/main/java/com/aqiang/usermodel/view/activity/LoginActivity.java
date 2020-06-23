@@ -62,19 +62,4 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, UserViewMo
         });
     }
 
-    public void changerUrl(View view){
-        UserApi userApi = RetrofitManager.getInstance().create(UserApi.class);
-        Call<UserEntity> changer = userApi.changer();
-        changer.enqueue(new Callback<UserEntity>() {
-            @Override
-            public void onResponse(Call<UserEntity> call, Response<UserEntity> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<UserEntity> call, Throwable t) {
-
-            }
-        });
-    }
 }

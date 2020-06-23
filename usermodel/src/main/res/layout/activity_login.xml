@@ -10,29 +10,40 @@
             name="login"
             type="com.aqiang.usermodel.view.activity.LoginActivity" />
     </data>
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <EditText
-            android:text="@={vm.userEntity.username}"
-            android:hint="请输入用户名"
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:text="@={vm.userEntity.pwd}"
-            android:hint="请输入密码"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <Button
-            android:onClick="@{login::loginOnClick}"
-            android:text="登陆"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <Button
-            android:onClick="@{login::changerUrl}"
-            android:text="改变url"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_height="wrap_content">
+            <EditText
+                android:text="@={vm.userEntity.username}"
+                android:hint="请输入用户名"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:text="@={vm.userEntity.pwd}"
+                android:hint="请输入密码"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_login"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_backgound"
+                android:onClick="@{login::loginOnClick}"
+                android:text="登陆"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="忘记密码"
+                android:textColor="@color/gold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+        </LinearLayout>
+    </RelativeLayout>
 </layout>

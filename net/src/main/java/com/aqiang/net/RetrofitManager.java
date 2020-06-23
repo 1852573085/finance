@@ -1,6 +1,10 @@
 package com.aqiang.net;
 
 import android.os.Build;
+import android.text.TextUtils;
+
+import com.aqiang.net.adapterfactory.LiveDataCallAdapterFactory;
+import com.aqiang.storage.sp.impl.StorageManager;
 
 import java.io.IOException;
 import java.util.List;
@@ -42,6 +46,7 @@ public class RetrofitManager {
                 .baseUrl(Config.BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(LiveDataCallAdapterFactory.create())
                 .build();
         return retrofit;
     }
@@ -109,14 +114,17 @@ public class RetrofitManager {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
+                String token = (String) StorageManager.getInstance().get("token");
+                if(!TextUtils.isEmpty(token)){
+                    return getResponse(request,token,chain);
+                }
                 Response response = chain.proceed(request);
                 if(response.code() == 401){
                     TokenEntity tokenEntity = getToken();
                     if(tokenEntity != null){
-                        Request newRequest = request.newBuilder()
-                                .addHeader("Authorization", tokenEntity.getToken_type() + " " + tokenEntity.getAccess_token())
-                                .build();
-                        return chain.proceed(newRequest);
+                        StorageManager.getInstance().save("token",tokenEntity.getAccess_token());
+
+                        return getResponse(request,tokenEntity.getAccess_token(),chain);
                     }else {
                         throw new NullPointerException("this is token null");
                     }
@@ -127,6 +135,17 @@ public class RetrofitManager {
         return interceptor;
     }
 
+    private Response getResponse(Request request, String token, Interceptor.Chain chain){
+        Request newRequest = request.newBuilder()
+                .addHeader("Authorization", "bearer " + token)
+                .build();
+        try {
+            return chain.proceed(newRequest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     private TokenEntity getToken() {
         TokenApi tokenApi = create(TokenApi.class);
         Call<TokenEntity> token = tokenApi.getToken("password", Config.AUTO_COED, "");
