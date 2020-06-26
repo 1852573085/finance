@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="rePwd"
+            type="android.databinding.ObservableField&lt;String>" />
+        <variable
+            name="code"
+            type="android.databinding.ObservableField&lt;String>" />
+        <variable
+            name="activity"
+            type="com.aqiang.usermodel.view.activity.UpdataPwdActivity" />
+        <variable
+            name="vm"
+            type="com.aqiang.usermodel.viewmodel.UserViewModel" />
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.aqiang.common.wiget.TitleBar
+            android:id="@+id/act_updata_cope"
+            app:leftIcon="@drawable/fanhui"
+            app:title="修改密码"
+            app:rightText="保存"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.aqiang.common.wiget.TitleBar>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:text="@={vm.userEntity.username}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:hint="输入电话号码"></EditText>
+
+            <Button
+                android:onClick="@{activity::onCodeClick}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_style1"
+                android:text="发送验证码"
+                android:textColor="@color/colorPrimaryDark"></Button>
+        </LinearLayout>
+
+        <EditText
+            android:text="@={code}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="验证码"></EditText>
+
+        <EditText
+            android:text="@={vm.userEntity.pwd}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入密码"
+            android:inputType="textPassword"></EditText>
+
+        <EditText
+            android:text="@={rePwd}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="再次输入密码"
+            android:inputType="textPassword"></EditText>
+    </LinearLayout>
+</layout>

@@ -20,7 +20,11 @@ public class StorageManager {
         iStorage.save(key,value);
     }
 
-    public Object get(String key) {
-        return iStorage.get(key);
+    public Object get(String key,Object defaultValue) {
+        return iStorage.get(key,defaultValue);
+    }
+
+    public void cloer(String key){
+        iStorage.coler(key);
     }
 }

@@ -2,16 +2,19 @@ package com.aqiang.usermodel.view.activity;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 
 import com.aqiang.core.view.BaseActivity;
 import com.aqiang.core.viewmodel.BaseViewModel;
 import com.aqiang.net.BaseReposenEntity;
 import com.aqiang.net.RetrofitManager;
+import com.aqiang.storage.sp.impl.StorageManager;
 import com.aqiang.usermodel.R;
 import com.aqiang.usermodel.api.UserApi;
 import com.aqiang.usermodel.databinding.ActivityLoginBinding;
@@ -23,7 +26,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, UserViewModel> {
-
+    private CheckBox checkBox;
     @Override
     protected int bindLayout() {
         return R.layout.activity_login;
@@ -38,6 +41,10 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, UserViewMo
     protected void setBinding() {
         binding.setVm(vm);
         binding.setLogin(this);
+        checkBox = findViewById(R.id.box_act_login);
+        if((Boolean) StorageManager.getInstance().get("cope",false)){
+            checkBox.setChecked(true);
+        }
     }
 
     public void loginOnClick(View view){
@@ -54,7 +61,9 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, UserViewMo
             @Override
             public void onChanged(@Nullable BaseReposenEntity<UserEntity> userEntityBaseReposenEntity) {
                 if(userEntityBaseReposenEntity.getCode() == 200){
-                    showToast("成功");
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 }else {
                     showToast("失败");
                 }
@@ -62,4 +71,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, UserViewMo
         });
     }
 
+
+    public void onCopeClick(View view){
+        StorageManager.getInstance().save("cope",true);
+    }
+
+    public void onUpDataClick(View view){
+        startActivity(new Intent(this,UpdataPwdActivity.class));
+    }
 }

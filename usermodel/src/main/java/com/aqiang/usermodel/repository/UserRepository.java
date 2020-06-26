@@ -18,4 +18,16 @@ public class UserRepository extends Repository<UserModel> {
     public LiveData<BaseReposenEntity<UserEntity>> login(UserEntity userEntity){
         return mModel.login(userEntity);
     }
+
+    public LiveData<BaseReposenEntity<String>> getCode(UserEntity userEntity){
+        return mModel.getCode(userEntity);
+    }
+
+    public LiveData<BaseReposenEntity<UserEntity>> register(UserEntity userEntity){
+        return mModel.register(userEntity);
+    }
+
+    public LiveData<BaseReposenEntity<UserEntity>> updataPwd(UserEntity userEntity){
+        return mModel.updataPwd(userEntity);
+    }
 }

@@ -5,7 +5,7 @@ if (userModelIsRun.toBoolean()) {
 }
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
-
+apply plugin: 'com.mob.sdk'
 def proInfo = rootProject.ext.android
 android {
     compileSdkVersion proInfo.compileSdkVersion
@@ -46,6 +46,34 @@ dependencies {
     implementation project(path: ':core')
     implementation project(path: ':net')
     implementation project(path: ':storage')
+}
+
+
+MobSDK {
+    appKey "2f7b3233d30f8"
+    appSecret "7808524aa324694b34d5a766ccf4bc48"
+    ShareSDK {
+        loopShare false
+        devInfo {
+            QQ {
+                id 7
+                sortId 7
+                appId "101860430"
+                appKey "165973584e05cabad581c7fc74fbd507"
+                shareByAppClient false
+                bypassApproval false
+                enable true
+            }
+            Wechat {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+                userName "gh_afb25ac019c9"
+                path "pages/index/index.html?id=1"
+                withShareTicket true
+                miniprogramType 2
+            }
+        }
+    }
 }
 repositories {
     mavenCentral()

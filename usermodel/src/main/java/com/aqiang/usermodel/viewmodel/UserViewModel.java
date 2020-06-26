@@ -20,4 +20,19 @@ public class UserViewModel extends BaseViewModel {
         UserRepository repository = getRepository(UserRepository.class.getSimpleName());
         return repository.login(userEntity);
     }
+
+    public LiveData<BaseReposenEntity<String>> getCode(){
+        UserRepository repository = getRepository(UserRepository.class.getSimpleName());
+        return repository.getCode(userEntity);
+    }
+
+    public LiveData<BaseReposenEntity<UserEntity>> register(){
+        UserRepository repository = getRepository(UserRepository.class.getSimpleName());
+        return repository.register(userEntity);
+    }
+
+    public LiveData<BaseReposenEntity<UserEntity>> updataPwd(){
+        UserRepository repository = getRepository(UserRepository.class.getSimpleName());
+        return repository.updataPwd(userEntity);
+    }
 }

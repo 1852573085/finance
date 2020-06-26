@@ -42,13 +42,12 @@
                 android:hint="请输入密码"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <TextView
-                android:layout_margin="10dp"
-                android:layout_gravity="right"
-                android:text="忘记密码"
-                android:textColor="@color/gold"
+            <CheckBox
+                android:id="@+id/box_act_login"
+                android:onClick="@{login::onCopeClick}"
+                android:text="记住密码"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></TextView>
+                android:layout_height="wrap_content" />
             <Button
                 android:textSize="20sp"
                 android:textColor="@color/white"
@@ -59,6 +58,14 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content" />
 
+            <TextView
+                android:onClick="@{login::onUpDataClick}"
+                android:layout_margin="10dp"
+                android:layout_gravity="right"
+                android:text="忘记密码"
+                android:textColor="@color/gold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
         </LinearLayout>
     </LinearLayout>
 </layout>

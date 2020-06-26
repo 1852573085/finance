@@ -45,4 +45,22 @@ public class UserModel implements IModel {
 //
         return data;
     }
+
+    public LiveData<BaseReposenEntity<String>> getCode(UserEntity userEntity){
+        UserApi userApi = RetrofitManager.getInstance().create(UserApi.class);
+        LiveData<BaseReposenEntity<String>> data = userApi.getCode(userEntity.getUsername());
+        return data;
+    }
+
+    public LiveData<BaseReposenEntity<UserEntity>> register(UserEntity userEntity){
+        UserApi userApi = RetrofitManager.getInstance().create(UserApi.class);
+        LiveData<BaseReposenEntity<UserEntity>> data = userApi.register(userEntity);
+        return data;
+    }
+
+    public LiveData<BaseReposenEntity<UserEntity>> updataPwd(UserEntity userEntity){
+        UserApi userApi = RetrofitManager.getInstance().create(UserApi.class);
+        LiveData<BaseReposenEntity<UserEntity>> data = userApi.updataPwd(userEntity);
+        return data;
+    }
 }

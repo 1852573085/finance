@@ -114,7 +114,7 @@ public class RetrofitManager {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                String token = (String) StorageManager.getInstance().get("token");
+                String token = (String) StorageManager.getInstance().get("token","");
                 if(!TextUtils.isEmpty(token)){
                     return getResponse(request,token,chain);
                 }

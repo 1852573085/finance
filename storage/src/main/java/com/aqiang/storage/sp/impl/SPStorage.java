@@ -10,7 +10,12 @@ public class SPStorage implements IStorage {
     }
 
     @Override
-    public Object get(String key) {
-        return SPUtlis.get(BaseApplication.getContext(),key,"");
+    public Object get(String key,Object defaultValue) {
+        return SPUtlis.get(BaseApplication.getContext(),key,defaultValue);
+    }
+
+    @Override
+    public void coler(String key) {
+        SPUtlis.remove(BaseApplication.getContext(),key);
     }
 }
