@@ -31,6 +31,16 @@ android {
     dataBinding {
         enabled = true
     }
+
+    sourceSets{
+        main{
+            if(userModelIsRun.toBoolean()){
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }else {
+                manifest.srcFile 'src/main/dubug/AndroidManifest.xml'
+            }
+        }
+    }
 }
 
 dependencies {

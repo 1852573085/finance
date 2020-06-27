@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
 def proInfo = rootProject.ext.android
+def libInfo = rootProject.ext.dependencies
 android {
     compileSdkVersion proInfo.compileSdkVersion
     buildToolsVersion proInfo.buildToolsVersion
@@ -36,6 +37,22 @@ dependencies {
     implementation project(path: ':common')
     implementation project(path: ':core')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation libInfo.design
+    if(accountModelIsRun.toBoolean()){
+        implementation project(path: ':account')
+    }
+    if(finalceModelIsRun.toBoolean()){
+        implementation project(path: ':finalce')
+    }
+    if(moreModelIsRun.toBoolean()){
+        implementation project(path: ':more')
+    }
+    if(homeModelIsRun.toBoolean()){
+        implementation project(path: ':home')
+    }
+    if(userModelIsRun.toBoolean()){
+        implementation project(path: ':usermodel')
+    }
 }
 repositories {
     mavenCentral()

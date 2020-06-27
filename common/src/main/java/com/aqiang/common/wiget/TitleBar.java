@@ -83,4 +83,28 @@ public class TitleBar extends RelativeLayout {
         void onLeftClick();
         void onRightClick();
     }
+
+    public void setTilte(String tilte){
+        title.setText(tilte);
+    }
+
+    public void setLeftIcon(Context context,int icon){
+        if(icon == 0){
+            left.setCompoundDrawables(null,null,null,null);
+            return;
+        }
+        Drawable drawable = ContextCompat.getDrawable(context, icon);
+        drawable.setBounds(0,0,50,50);
+        left.setCompoundDrawables(drawable,null,null,null);
+    }
+
+    public void setRightIcon(Context context,int icon){
+        if(icon == 0){
+            right.setCompoundDrawables(null,null,null,null);
+            return;
+        }
+        Drawable drawable = ContextCompat.getDrawable(context, icon);
+        drawable.setBounds(0,0,50,50);
+        right.setCompoundDrawables(drawable,null,null,null);
+    }
 }
