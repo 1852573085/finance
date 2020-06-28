@@ -21,9 +21,20 @@ public abstract class BaseFragment<Binding extends ViewDataBinding,VM extends Ba
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater,bindLayout(),container,false);
         vm = createVM();
+        View view = binding.getRoot();
+        initView(view);
         setBinding();
-        return  binding.getRoot();
+        return view;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initData();
+        initEvent();
+    }
+
+
 
     protected void showToast(String msg){
         ShowToast.INSTANCE.toast(getContext(),msg);
@@ -33,5 +44,11 @@ public abstract class BaseFragment<Binding extends ViewDataBinding,VM extends Ba
 
     protected abstract VM createVM();
 
+    protected abstract void initView(View view);
+
     protected abstract void setBinding();
+
+    protected abstract void initData();
+
+    protected abstract void initEvent();
 }
