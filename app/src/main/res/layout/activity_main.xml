@@ -16,7 +16,7 @@
             app:leftIcon="@drawable/user2"
             app:rightIcon="@drawable/msg2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.aqiang.common.wiget.TitleBar>
+            android:layout_height="50dp"></com.aqiang.common.wiget.TitleBar>
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_act_main"
             android:layout_weight="10"

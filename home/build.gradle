@@ -51,6 +51,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation libInfo.banner
+    implementation libInfo.room
+    annotationProcessor libInfo.room_compiler
     implementation project(path: ':net')
     implementation project(path: ':storage')
     implementation project(path: ':common')

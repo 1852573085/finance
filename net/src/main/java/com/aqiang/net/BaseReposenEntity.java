@@ -5,6 +5,10 @@ public class BaseReposenEntity<T> {
     private T data;
     private String msg;
 
+    public BaseReposenEntity(T data) {
+        this.data = data;
+    }
+
     public BaseReposenEntity(int code, T data, String msg) {
         this.code = code;
         this.data = data;
