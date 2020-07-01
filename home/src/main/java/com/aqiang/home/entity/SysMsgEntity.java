@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "tb_sysmsg")
 public class SysMsgEntity {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     public int uid;
     @ColumnInfo
     private int id;

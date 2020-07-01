@@ -18,6 +18,10 @@ android {
 
     }
 
+    dataBinding{
+        enabled = true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -43,6 +47,9 @@ dependencies {
     api libs.rxandroid
     api libs.rxjava
     api libs.glide
+    api libs.design
+    api libs.SmartRefreshLayout
+    api libs.SmartRefreshHeader
 }
 repositories {
     mavenCentral()

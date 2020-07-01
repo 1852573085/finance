@@ -1,5 +1,6 @@
 package com.aqiang.home.viewmodel;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 
 import com.aqiang.core.repository.Repository;
@@ -13,8 +14,9 @@ import com.aqiang.net.BaseReposenEntity;
 import java.util.List;
 
 public class HomeViewModel extends BaseViewModel {
-    public HomeViewModel() {
-        registerRepository(HomeRepository.class.getSimpleName(),new HomeRepository());
+    public HomeViewModel(LifecycleOwner owner) {
+        super(owner);
+        registerRepository(HomeRepository.class.getSimpleName(),new HomeRepository(owner));
     }
 
     public LiveData<BaseReposenEntity<List<BannerEntity>>> getBanner(){

@@ -11,9 +11,16 @@ import java.net.URL;
 
 public class NetUtils {
     public static boolean netIsAvailable(Context context){
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        return networkInfo.isAvailable();
+        if (context!=null){
+            ConnectivityManager connectServerManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetworkInfo = connectServerManager.getActiveNetworkInfo();
+            if (activeNetworkInfo==null){
+                return false;
+            }
+
+            return activeNetworkInfo.isAvailable();
+        }
+        return false;
     }
 
     public static boolean isConnected(){

@@ -15,19 +15,19 @@ import java.util.List;
 @Dao
 public interface HomeDao {
     @Query("select * from tb_banner")
-    LiveData<List<BannerEntity>> getBannerAll();
+    List<BannerEntity> getBannerAll();
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertBannerAll(List<BannerEntity> banners);
 
     @Query("select * from tb_product where isnew = 0")
-    LiveData<List<ProductEntity>> getProductAll();
+    List<ProductEntity> getProductAll();
     @Query("select * from tb_product where isnew = 1")
-    LiveData<List<ProductEntity>> getNewProduct();
+    List<ProductEntity> getNewProduct();
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertProductAll(List<ProductEntity> products);
 
     @Query("select * from tb_sysmsg")
-    LiveData<List<SysMsgEntity>> getSysMsgAll();
+    List<SysMsgEntity> getSysMsgAll();
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertSysMsgAll(List<SysMsgEntity> sysmsg);
 }

@@ -1,11 +1,15 @@
 package com.aqiang.home.repository;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.aqiang.common.BaseApplication;
 import com.aqiang.common.net.NetUtils;
+import com.aqiang.common.utlis.PoolThread;
 import com.aqiang.core.repository.Repository;
 import com.aqiang.home.entity.BannerEntity;
 import com.aqiang.home.entity.ProductEntity;
@@ -27,7 +31,8 @@ public class HomeRepository extends Repository<HomeRemoteModel> {
 
     private HomeLoaclModel homeLoaclModel;
 
-    public HomeRepository() {
+    public HomeRepository(LifecycleOwner owner) {
+        super(owner);
         homeLoaclModel = new HomeLoaclModel();
     }
 
@@ -38,76 +43,111 @@ public class HomeRepository extends Repository<HomeRemoteModel> {
 
     public LiveData<BaseReposenEntity<List<BannerEntity>>> getBanner(){
         if(NetUtils.netIsAvailable(BaseApplication.getContext())){
-            final LiveData<BaseReposenEntity<List<BannerEntity>>> banner = mModel.getBanner();
-            Observable observable = Observable.create(new ObservableOnSubscribe() {
+            LiveData<BaseReposenEntity<List<BannerEntity>>> banner = mModel.getBanner();
+            banner.observe(owner, new Observer<BaseReposenEntity<List<BannerEntity>>>() {
                 @Override
-                public void subscribe(ObservableEmitter emitter) throws Exception {
-                    HomeDBHelper.getInstance().getDb().homeDao().insertBannerAll(banner.getValue().getData());
+                public void onChanged(@Nullable final BaseReposenEntity<List<BannerEntity>> listBaseReposenEntity) {
+                    PoolThread.getInstance().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            HomeDBHelper.getInstance().getDb().homeDao().insertBannerAll(listBaseReposenEntity.getData());
+                        }
+                    });
                 }
             });
-            BaseObservable.doObserver(new BaseObserver<Object>(),observable);
             return banner;
         }else {
-            LiveData<List<BannerEntity>> liveData = homeLoaclModel.getBanner();
-            MutableLiveData<BaseReposenEntity<List<BannerEntity>>> mutableLiveData = new MutableLiveData<>();
-            mutableLiveData.setValue(new BaseReposenEntity<List<BannerEntity>>(liveData.getValue()));
+            final MutableLiveData<BaseReposenEntity<List<BannerEntity>>> mutableLiveData = new MutableLiveData<>();
+            PoolThread.getInstance().execute(new Runnable() {
+                @Override
+                public void run() {
+                    List<BannerEntity> liveData = homeLoaclModel.getBanner();
+                    mutableLiveData.postValue(new BaseReposenEntity<List<BannerEntity>>(liveData));
+                }
+            });
+
             return mutableLiveData;
         }
-        //return homeApi.getBanner();
+
     }
 
     public LiveData<BaseReposenEntity<List<SysMsgEntity>>> getSystemMsg(){
         if(NetUtils.netIsAvailable(BaseApplication.getContext())){
-            final LiveData<BaseReposenEntity<List<SysMsgEntity>>> systemMsg = mModel.getSystemMsg();
-            Observable observable = Observable.create(new ObservableOnSubscribe() {
+            LiveData<BaseReposenEntity<List<SysMsgEntity>>> systemMsg = mModel.getSystemMsg();
+            systemMsg.observe(owner, new Observer<BaseReposenEntity<List<SysMsgEntity>>>() {
                 @Override
-                public void subscribe(ObservableEmitter emitter) throws Exception {
-                    HomeDBHelper.getInstance().getDb().homeDao().insertSysMsgAll(systemMsg.getValue().getData());
+                public void onChanged(@Nullable final BaseReposenEntity<List<SysMsgEntity>> listBaseReposenEntity) {
+                    PoolThread.getInstance().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            HomeDBHelper.getInstance().getDb().homeDao().insertSysMsgAll(listBaseReposenEntity.getData());
+                        }
+                    });
                 }
             });
-            BaseObservable.doObserver(new BaseObserver<Object>(),observable);
             return systemMsg;
         }else {
-            LiveData<List<SysMsgEntity>> sysMsgAll = homeLoaclModel.getSystemMsg();
-            MutableLiveData<BaseReposenEntity<List<SysMsgEntity>>> liveData = new MutableLiveData<>();
-            liveData.setValue(new BaseReposenEntity<List<SysMsgEntity>>(sysMsgAll.getValue()));
+
+            final MutableLiveData<BaseReposenEntity<List<SysMsgEntity>>> liveData = new MutableLiveData<>();
+            PoolThread.getInstance().execute(new Runnable() {
+                @Override
+                public void run() {
+                    List<SysMsgEntity> sysMsgAll = homeLoaclModel.getSystemMsg();
+                    liveData.setValue(new BaseReposenEntity<List<SysMsgEntity>>(sysMsgAll));
+                }
+            });
+
             return liveData;
         }
     }
 
     public LiveData<BaseReposenEntity<List<ProductEntity>>> getNewUserProduct(){
         if(NetUtils.netIsAvailable(BaseApplication.getContext())){
-            final LiveData<BaseReposenEntity<List<ProductEntity>>> userProduct = mModel.getNewUserProduct();
-            Observable observable = Observable.create(new ObservableOnSubscribe() {
+            LiveData<BaseReposenEntity<List<ProductEntity>>> userProduct = mModel.getNewUserProduct();
+            userProduct.observe(owner, new Observer<BaseReposenEntity<List<ProductEntity>>>() {
                 @Override
-                public void subscribe(ObservableEmitter emitter) throws Exception {
-                    HomeDBHelper.getInstance().getDb().homeDao().insertProductAll(userProduct.getValue().getData());
+                public void onChanged(@Nullable BaseReposenEntity<List<ProductEntity>> listBaseReposenEntity) {
+                    HomeDBHelper.getInstance().getDb().homeDao().insertProductAll(listBaseReposenEntity.getData());
                 }
             });
             return userProduct;
         }else {
-            LiveData<List<ProductEntity>> newProduct = homeLoaclModel.getNewProduct();
-            MutableLiveData<BaseReposenEntity<List<ProductEntity>>> liveData = new MutableLiveData<>();
-            liveData.setValue(new BaseReposenEntity<List<ProductEntity>>(newProduct.getValue()));
+            final MutableLiveData<BaseReposenEntity<List<ProductEntity>>> liveData = new MutableLiveData<>();
+            PoolThread.getInstance().execute(new Runnable() {
+                @Override
+                public void run() {
+                    List<ProductEntity> newProduct = homeLoaclModel.getNewProduct();
+
+                    liveData.setValue(new BaseReposenEntity<List<ProductEntity>>(newProduct));
+                }
+            });
+
             return liveData;
         }
     }
 
     public LiveData<BaseReposenEntity<List<ProductEntity>>> getProduct(){
         if(NetUtils.netIsAvailable(BaseApplication.getContext())){
-            final LiveData<BaseReposenEntity<List<ProductEntity>>> userProduct = mModel.getProduct();
-            Observable observable = Observable.create(new ObservableOnSubscribe() {
+            LiveData<BaseReposenEntity<List<ProductEntity>>> userProduct = mModel.getProduct();
+            userProduct.observe(owner, new Observer<BaseReposenEntity<List<ProductEntity>>>() {
                 @Override
-                public void subscribe(ObservableEmitter emitter) throws Exception {
-                    HomeDBHelper.getInstance().getDb().homeDao().insertProductAll(userProduct.getValue().getData());
+                public void onChanged(@Nullable BaseReposenEntity<List<ProductEntity>> listBaseReposenEntity) {
+                    HomeDBHelper.getInstance().getDb().homeDao().insertProductAll(listBaseReposenEntity.getData());
                 }
             });
             return userProduct;
         }else {
-            LiveData<List<ProductEntity>> product = homeLoaclModel.getProduct();
+            final MutableLiveData<BaseReposenEntity<List<ProductEntity>>> liveData = new MutableLiveData<>();
+
             // LiveData<List<ProductEntity>> newProduct = HomeDBHelper.getInstance().getDb().homeDao().getProductAll();
-            MutableLiveData<BaseReposenEntity<List<ProductEntity>>> liveData = new MutableLiveData<>();
-            liveData.setValue(new BaseReposenEntity<List<ProductEntity>>(product.getValue()));
+            PoolThread.getInstance().execute(new Runnable() {
+                @Override
+                public void run() {
+                    List<ProductEntity> product = homeLoaclModel.getProduct();
+                    liveData.setValue(new BaseReposenEntity<List<ProductEntity>>(product));
+                }
+            });
+
             return liveData;
         }
     }

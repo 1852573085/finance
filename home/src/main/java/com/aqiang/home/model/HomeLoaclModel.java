@@ -13,23 +13,23 @@ import com.aqiang.net.BaseReposenEntity;
 import java.util.List;
 
 public class HomeLoaclModel implements IModel {
-    public LiveData<List<BannerEntity>> getBanner(){
+    public List<BannerEntity> getBanner(){
         //return homeApi.getBanner();
-        LiveData<List<BannerEntity>> data = HomeDBHelper.getInstance().getDb().homeDao().getBannerAll();
+        List<BannerEntity> data = HomeDBHelper.getInstance().getDb().homeDao().getBannerAll();
         return data;
     }
 //
-    public LiveData<List<SysMsgEntity>> getSystemMsg(){
+    public List<SysMsgEntity> getSystemMsg(){
         //return homeApi.getSystemMsg();
         return HomeDBHelper.getInstance().getDb().homeDao().getSysMsgAll();
     }
 //
-    public LiveData<List<ProductEntity>> getNewProduct(){
+    public List<ProductEntity> getNewProduct(){
         //return homeApi.getNewUserProduct();
         return HomeDBHelper.getInstance().getDb().homeDao().getNewProduct();
     }
 
-    public LiveData<List<ProductEntity>> getProduct(){
+    public List<ProductEntity> getProduct(){
        // return homeApi.getProduct();
         return HomeDBHelper.getInstance().getDb().homeDao().getProductAll();
     }

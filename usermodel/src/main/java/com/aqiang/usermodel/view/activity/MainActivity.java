@@ -27,7 +27,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, UserViewMode
 
     @Override
     protected UserViewModel createVM() {
-        return new UserViewModel();
+        return new UserViewModel(this);
     }
 
     @Override

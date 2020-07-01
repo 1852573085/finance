@@ -1,38 +1,39 @@
-package com.aqiang.home.entity;
+package com.aqiang.finalce.entity;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-
-@Entity(tableName = "tb_product")
-public class ProductEntity {
-    @PrimaryKey
-    public int uid;
-
-    @ColumnInfo
+public class FinalceEntity {
     private int id;
-    @ColumnInfo
     private String productname;
-    @ColumnInfo
     private String productdesc;
-    @ColumnInfo
     private int producttype;
-    @ColumnInfo
     private double yearrate;
-    @ColumnInfo
     private double totalamount;
-    @ColumnInfo
     private int saleamount;
-    @ColumnInfo
     private String labels;
-    @ColumnInfo
     private int lockdays;
-    @ColumnInfo
     private int minbugamount;
-    @ColumnInfo
     private int isnew;
-    @ColumnInfo
     private int startlevel;
+
+    public FinalceEntity(){}
+
+    public FinalceEntity(String productname) {
+        this.productname = productname;
+    }
+
+    public FinalceEntity(int id, String productname, String productdesc, int producttype, double yearrate, double totalamount, int saleamount, String labels, int lockdays, int minbugamount, int isnew, int startlevel) {
+        this.id = id;
+        this.productname = productname;
+        this.productdesc = productdesc;
+        this.producttype = producttype;
+        this.yearrate = yearrate;
+        this.totalamount = totalamount;
+        this.saleamount = saleamount;
+        this.labels = labels;
+        this.lockdays = lockdays;
+        this.minbugamount = minbugamount;
+        this.isnew = isnew;
+        this.startlevel = startlevel;
+    }
 
     public int getId() {
         return id;

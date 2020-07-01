@@ -20,7 +20,8 @@ ext{
             glide: "4.9.0",
             design:"28.0.0",
             banner:"1.4.10",
-            room:"1.0.0"
+            room:"1.0.0",
+            SmartRefreshLayout:"1.1.0"
     ]
 
     dependencies=[
@@ -35,7 +36,9 @@ ext{
             design:"com.android.support:design:$dependenciesVersion.design",
             banner:"com.youth.banner:banner:$dependenciesVersion.banner",
             room:"android.arch.persistence.room:runtime:$dependenciesVersion.room",
-            room_compiler:"android.arch.persistence.room:compiler:$dependenciesVersion.room"
+            room_compiler:"android.arch.persistence.room:compiler:$dependenciesVersion.room",
+            SmartRefreshLayout:"com.scwang.smartrefresh:SmartRefreshLayout:$dependenciesVersion.SmartRefreshLayout",
+            SmartRefreshHeader:"com.scwang.smartrefresh:SmartRefreshHeader:$dependenciesVersion.SmartRefreshLayout"
     ]
 
     url=[

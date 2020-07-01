@@ -1,5 +1,6 @@
 package com.aqiang.usermodel.viewmodel;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 
 import com.aqiang.core.repository.Repository;
@@ -11,9 +12,10 @@ import com.aqiang.usermodel.repository.UserRepository;
 public class UserViewModel extends BaseViewModel {
     public UserEntity userEntity;
 
-    public UserViewModel() {
+    public UserViewModel(LifecycleOwner owner) {
+        super(owner);
         userEntity = new UserEntity();
-        registerRepository(UserRepository.class.getSimpleName(),new UserRepository());
+        registerRepository(UserRepository.class.getSimpleName(),new UserRepository(owner));
     }
 
     public LiveData<BaseReposenEntity<UserEntity>> login(){

@@ -31,7 +31,7 @@ public class UpdataPwdActivity extends BaseActivity<ActivityUpdataPwdBinding, Us
 
     @Override
     protected UserViewModel createVM() {
-        return new UserViewModel();
+        return new UserViewModel(this);
     }
 
     @Override

@@ -20,9 +20,14 @@ import com.aqiang.common.BaseApplication;
 import com.aqiang.core.view.BaseFragment;
 import com.aqiang.home.databinding.FragmentHomeBinding;
 import com.aqiang.home.entity.BannerEntity;
+import com.aqiang.home.entity.SysMsgEntity;
 import com.aqiang.home.viewmodel.HomeViewModel;
 import com.aqiang.net.BaseReposenEntity;
 import com.bumptech.glide.Glide;
+import com.scwang.smartrefresh.header.DropBoxHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
@@ -34,6 +39,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
 
     private Banner mBannerFragHome;
     private ViewFlipper mVfFragHome;
+    private SmartRefreshLayout mRefreshFragHome;
 
     @Override
     protected int bindLayout() {
@@ -42,13 +48,14 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
 
     @Override
     protected HomeViewModel createVM() {
-        return new HomeViewModel();
+        return new HomeViewModel(getActivity());
     }
 
     @Override
     protected void initView(View view) {
         mBannerFragHome = (Banner) view.findViewById(R.id.banner_frag_home);
         mVfFragHome = (ViewFlipper) view.findViewById(R.id.vf_frag_home);
+        mRefreshFragHome = (SmartRefreshLayout) view.findViewById(R.id.refresh_frag_home);
     }
 
     @Override
@@ -64,13 +71,14 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
             public void onChanged(@Nullable BaseReposenEntity<List<BannerEntity>> listBaseReposenEntity) {
                 List<String> imgPath=new ArrayList<>();
                 List<String> strings=new ArrayList<>();
-                strings.add("金融产品1");
-                strings.add("金融产品2");
-                strings.add("金融产品3");
+//                strings.add("金融产品1");
+//                strings.add("金融产品2");
+//                strings.add("金融产品3");
                 //strings.add("金融产品4");
                 List<BannerEntity> data = listBaseReposenEntity.getData();
                 for (int i = 0; i < data.size(); i++) {
                     imgPath.add(data.get(i).getImgurl());
+                    strings.add("金融产品"+i);
                 }
                 //Log.d("swq",""+imgPath.size());
                 initBanner(imgPath,strings);
@@ -84,20 +92,19 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
 
 
 
-
-        for (int i = 0; i < 10 ; i++) {
-            View view = getLayoutInflater().inflate(R.layout.item_flipper, null);
-            TextView textView = view.findViewById(R.id.tv_item_flipper);
-            textView.setText("item"+i);
-            mVfFragHome.addView(view);
-        }
-        mVfFragHome.setFlipInterval(2000);
-        mVfFragHome.startFlipping();
+        initSysMsg();
     }
 
     @Override
     protected void initEvent() {
-
+        mRefreshFragHome.setRefreshHeader(new DropBoxHeader(getContext()));
+        mRefreshFragHome.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                initData();
+                mRefreshFragHome.finishRefresh();
+            }
+        });
     }
 
     @BindingAdapter("imgPic")
@@ -106,6 +113,32 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
                 .load(url)
                 .into(imageView);
     }
+
+    private void initSysMsg() {
+        LiveData<BaseReposenEntity<List<SysMsgEntity>>> systemMsg = vm.getSystemMsg();
+        systemMsg.observe(this, new Observer<BaseReposenEntity<List<SysMsgEntity>>>() {
+            @Override
+            public void onChanged(@Nullable BaseReposenEntity<List<SysMsgEntity>> listBaseReposenEntity) {
+                List<SysMsgEntity> data = listBaseReposenEntity.getData();
+                for (int i = 0; i < data.size() ; i++) {
+                    View view = getLayoutInflater().inflate(R.layout.item_flipper, null);
+                    TextView textView = view.findViewById(R.id.tv_item_flipper);
+                    textView.setText(data.get(i).getMsg());
+                    mVfFragHome.addView(view);
+                }
+                mVfFragHome.setFlipInterval(2000);
+                mVfFragHome.startFlipping();
+            }
+        });
+//        for (int i = 0; i < 10 ; i++) {
+//            View view = getLayoutInflater().inflate(R.layout.item_flipper, null);
+//            TextView textView = view.findViewById(R.id.tv_item_flipper);
+//            textView.setText("item"+i);
+//            mVfFragHome.addView(view);
+//        }
+
+    }
+
 
     private void initBanner(List<String> imgPath,List<String> strings){
         mBannerFragHome.setImages(imgPath);

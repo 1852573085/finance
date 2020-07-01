@@ -2,6 +2,7 @@ package com.aqiang.core.viewmodel;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ViewModel;
 
@@ -15,7 +16,7 @@ public class BaseViewModel extends ViewModel implements LifecycleObserver {
     //protected R mRepository;
     protected Map<String,Repository> repositoryMap;
 
-    public BaseViewModel() {
+    public BaseViewModel(LifecycleOwner owner) {
         repositoryMap = new HashMap<>();
     }
 

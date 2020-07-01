@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "tb_banner")
 public class BannerEntity {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     public int uid;
 
     @ColumnInfo

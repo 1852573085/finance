@@ -1,5 +1,6 @@
 package com.aqiang.usermodel.repository;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.os.Looper;
@@ -10,6 +11,10 @@ import com.aqiang.usermodel.entity.UserEntity;
 import com.aqiang.usermodel.model.UserModel;
 
 public class UserRepository extends Repository<UserModel> {
+    public UserRepository(LifecycleOwner owner) {
+        super(owner);
+    }
+
     @Override
     protected void createModel() {
         mModel = new UserModel();

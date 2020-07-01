@@ -37,7 +37,6 @@ dependencies {
     implementation project(path: ':common')
     implementation project(path: ':core')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation libInfo.design
     if(accountModelIsRun.toBoolean()){
         implementation project(path: ':account')
     }
