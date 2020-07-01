@@ -1,5 +1,7 @@
 package com.aqiang.finalce;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +18,7 @@ import com.aqiang.finalce.adapter.FinalceAdapter;
 import com.aqiang.finalce.databinding.FragmentFinalceBinding;
 import com.aqiang.finalce.entity.FinalceEntity;
 import com.aqiang.finalce.viewmodel.FinalceViewModel;
+import com.aqiang.net.BaseReposenEntity;
 import com.scwang.smartrefresh.header.DeliveryHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -31,8 +34,15 @@ public class FinalceFragment extends BaseFragment<FragmentFinalceBinding, Finalc
     private SmartRefreshLayout mRefreshFragFinalce;
     private RecyclerView mRvFragFinalce;
     private FinalceAdapter finalceAdapter;
-    private List<FinalceEntity> list;
-
+    private int currentType = 0;
+    /**
+     * 当前页码
+     */
+    private int currentPage = 0;
+    /**
+     * 每页数据行数
+     */
+    private int pagesize = 10;
     @Override
     protected int bindLayout() {
         return R.layout.fragment_finalce;
@@ -60,13 +70,18 @@ public class FinalceFragment extends BaseFragment<FragmentFinalceBinding, Finalc
     @Override
     protected void initData() {
         finalceAdapter = new FinalceAdapter(getContext());
-        list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            FinalceEntity finalceEntity = new FinalceEntity("item" + i);
-            list.add(finalceEntity);
-        }
-        finalceAdapter.loadData(list);
+        initRv();
         mRvFragFinalce.setAdapter(finalceAdapter);
+    }
+
+    private void initRv() {
+        LiveData<BaseReposenEntity<List<FinalceEntity>>> finalceByType = vm.getFinalceByType(currentType, currentPage, pagesize);
+        finalceByType.observe(this, new Observer<BaseReposenEntity<List<FinalceEntity>>>() {
+            @Override
+            public void onChanged(@Nullable BaseReposenEntity<List<FinalceEntity>> listBaseReposenEntity) {
+                finalceAdapter.loadData(listBaseReposenEntity.getData());
+            }
+        });
     }
 
     @Override
@@ -74,13 +89,12 @@ public class FinalceFragment extends BaseFragment<FragmentFinalceBinding, Finalc
         mRefreshFragFinalce.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                finalceAdapter.appendDataSource(list);
                 mRefreshFragFinalce.finishLoadMore();
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                finalceAdapter.loadData(list);
+
                 mRefreshFragFinalce.finishRefresh();
             }
         });
@@ -88,12 +102,13 @@ public class FinalceFragment extends BaseFragment<FragmentFinalceBinding, Finalc
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if(tab.getPosition() == 0){
-
+                    currentType = 0;
                 }else if(tab.getPosition() == 1){
-
+                    currentType = 1;
                 }else if(tab.getPosition() == 2){
-
+                    currentType = 2;
                 }
+                initRv();
             }
 
             @Override

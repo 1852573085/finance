@@ -1,17 +1,34 @@
 package com.aqiang.finalce.entity;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity(tableName = "tb_finalce")
 public class FinalceEntity {
+    @PrimaryKey(autoGenerate = false)
     private int id;
+    @ColumnInfo
     private String productname;
+    @ColumnInfo
     private String productdesc;
+    @ColumnInfo
     private int producttype;
+    @ColumnInfo
     private double yearrate;
+    @ColumnInfo
     private double totalamount;
+    @ColumnInfo
     private int saleamount;
+    @ColumnInfo
     private String labels;
+    @ColumnInfo
     private int lockdays;
+    @ColumnInfo
     private int minbugamount;
+    @ColumnInfo
     private int isnew;
+    @ColumnInfo
     private int startlevel;
 
     public FinalceEntity(){}

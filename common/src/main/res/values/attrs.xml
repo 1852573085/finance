@@ -9,4 +9,12 @@
         <attr name="rightText" format="string"></attr>
         <attr name="rightIcon" format="reference"></attr>
     </declare-styleable>
+
+    <declare-styleable name="FinalceProView">
+        <attr name="textColor" format="color"></attr>
+        <attr name="textSize" format="dimension"></attr>
+
+        <attr name="stork_width" format="dimension"></attr>
+        <attr name="stork_color" format="color"></attr>
+    </declare-styleable>
 </resources>
