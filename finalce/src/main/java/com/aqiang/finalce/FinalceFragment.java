@@ -2,6 +2,7 @@ package com.aqiang.finalce;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
+import android.databinding.BindingAdapter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.aqiang.common.wiget.FinalceProView;
 import com.aqiang.core.view.BaseFragment;
 import com.aqiang.finalce.adapter.FinalceAdapter;
 import com.aqiang.finalce.databinding.FragmentFinalceBinding;
@@ -70,16 +72,20 @@ public class FinalceFragment extends BaseFragment<FragmentFinalceBinding, Finalc
     @Override
     protected void initData() {
         finalceAdapter = new FinalceAdapter(getContext());
-        initRv();
+        initRv(false);
         mRvFragFinalce.setAdapter(finalceAdapter);
     }
 
-    private void initRv() {
+    private void initRv(final boolean isLoad) {
         LiveData<BaseReposenEntity<List<FinalceEntity>>> finalceByType = vm.getFinalceByType(currentType, currentPage, pagesize);
         finalceByType.observe(this, new Observer<BaseReposenEntity<List<FinalceEntity>>>() {
             @Override
             public void onChanged(@Nullable BaseReposenEntity<List<FinalceEntity>> listBaseReposenEntity) {
-                finalceAdapter.loadData(listBaseReposenEntity.getData());
+                if(isLoad){
+                    finalceAdapter.appendDataSource(listBaseReposenEntity.getData());
+                }else {
+                    finalceAdapter.loadData(listBaseReposenEntity.getData());
+                }
             }
         });
     }
@@ -89,12 +95,15 @@ public class FinalceFragment extends BaseFragment<FragmentFinalceBinding, Finalc
         mRefreshFragFinalce.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                currentPage++;
+                initRv(true);
                 mRefreshFragFinalce.finishLoadMore();
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
+                currentPage=0;
+                initRv(false);
                 mRefreshFragFinalce.finishRefresh();
             }
         });
@@ -108,7 +117,7 @@ public class FinalceFragment extends BaseFragment<FragmentFinalceBinding, Finalc
                 }else if(tab.getPosition() == 2){
                     currentType = 2;
                 }
-                initRv();
+                initRv(false);
             }
 
             @Override
@@ -121,5 +130,12 @@ public class FinalceFragment extends BaseFragment<FragmentFinalceBinding, Finalc
 
             }
         });
+    }
+
+    @BindingAdapter({"sweepangle","txtcontent"})
+    public static void setContent(FinalceProView pro,String totalamount,String saleamount){
+        float sweepAngle = (Float.parseFloat(totalamount) - Float.parseFloat(saleamount))/Float.parseFloat(totalamount);
+        pro.setSweepAngle(sweepAngle*360);
+        pro.setText(sweepAngle*100+"%");
     }
 }

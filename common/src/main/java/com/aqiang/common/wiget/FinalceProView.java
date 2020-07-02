@@ -26,7 +26,7 @@ public class FinalceProView extends View {
     private float storkWidth;
     private int default_width=100;
     private int default_height=100;
-
+    private String text="";
     private float sweepAngle=360;
     public FinalceProView(Context context) {
         super(context);
@@ -62,6 +62,8 @@ public class FinalceProView extends View {
             txtSize = typedArray.getDimension(R.styleable.FinalceProView_textSize, defaultTextSize);
             strokColor = typedArray.getColor(R.styleable.FinalceProView_stork_color, defaultColor);
             storkWidth = typedArray.getDimension(R.styleable.FinalceProView_stork_width, defaultStorkWidth);
+            sweepAngle = typedArray.getFloat(R.styleable.FinalceProView_sweepangle, sweepAngle);
+            text = typedArray.getString(R.styleable.FinalceProView_txtcontent);
             typedArray.recycle();
         }
     }
@@ -91,10 +93,21 @@ public class FinalceProView extends View {
         float right = this.getMeasuredWidth() - getPaddingRight();
         float bottom = this.getMeasuredHeight() - getPaddingBottom();
         RectF rectF=new RectF(left,top,right,bottom);
+        Paint.FontMetrics fontMetrics = txtPaint.getFontMetrics();
+        float d = (fontMetrics.bottom - fontMetrics.top)/2 - fontMetrics.bottom;
+        float hegiht = rectF.centerY() + d;
         canvas.drawArc(rectF,0,sweepAngle,false,storkPaint);
+        if(text != null){
+            canvas.drawText(text,rectF.centerX(),hegiht,txtPaint);
+        }
+
     }
 
     public void setSweepAngle(float sweepAngle) {
         this.sweepAngle = sweepAngle;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

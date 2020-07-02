@@ -2,6 +2,7 @@ package com.aqiang.finalce.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "tb_finalce")
@@ -33,10 +34,11 @@ public class FinalceEntity {
 
     public FinalceEntity(){}
 
+    @Ignore
     public FinalceEntity(String productname) {
         this.productname = productname;
     }
-
+    @Ignore
     public FinalceEntity(int id, String productname, String productdesc, int producttype, double yearrate, double totalamount, int saleamount, String labels, int lockdays, int minbugamount, int isnew, int startlevel) {
         this.id = id;
         this.productname = productname;
