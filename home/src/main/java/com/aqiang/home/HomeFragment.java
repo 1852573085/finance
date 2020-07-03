@@ -12,11 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.aqiang.common.BaseApplication;
+import com.aqiang.common.router.RouterManager;
+import com.aqiang.common.router.RouterPath;
 import com.aqiang.core.view.BaseFragment;
 import com.aqiang.home.databinding.FragmentHomeBinding;
 import com.aqiang.home.entity.BannerEntity;
@@ -40,6 +43,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     private Banner mBannerFragHome;
     private ViewFlipper mVfFragHome;
     private SmartRefreshLayout mRefreshFragHome;
+    private android.widget.Button mBtNewUserBuy;
 
     @Override
     protected int bindLayout() {
@@ -56,6 +60,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         mBannerFragHome = (Banner) view.findViewById(R.id.banner_frag_home);
         mVfFragHome = (ViewFlipper) view.findViewById(R.id.vf_frag_home);
         mRefreshFragHome = (SmartRefreshLayout) view.findViewById(R.id.refresh_frag_home);
+        mBtNewUserBuy = (Button) view.findViewById(R.id.bt_new_user_buy);
     }
 
     @Override
@@ -97,6 +102,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
 
     @Override
     protected void initEvent() {
+        mBtNewUserBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RouterManager.getInstance().router(RouterPath.FINALCE);
+            }
+        });
         mRefreshFragHome.setRefreshHeader(new DropBoxHeader(getContext()));
         mRefreshFragHome.setOnRefreshListener(new OnRefreshListener() {
             @Override

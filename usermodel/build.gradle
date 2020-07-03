@@ -6,6 +6,7 @@ if (userModelIsRun.toBoolean()) {
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.mob.sdk'
+def libInfo = rootProject.ext.dependencies
 def proInfo = rootProject.ext.android
 android {
     compileSdkVersion proInfo.compileSdkVersion
@@ -19,7 +20,11 @@ android {
         versionName proInfo.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -56,6 +61,7 @@ dependencies {
     implementation project(path: ':core')
     implementation project(path: ':net')
     implementation project(path: ':storage')
+    annotationProcessor libInfo.arouter_compiler
 }
 
 

@@ -15,6 +15,11 @@ android {
         versionName proInfo.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
 
     }
 
@@ -50,6 +55,7 @@ dependencies {
     api libs.design
     api libs.SmartRefreshLayout
     api libs.SmartRefreshHeader
+    api libs.arouter
 }
 repositories {
     mavenCentral()

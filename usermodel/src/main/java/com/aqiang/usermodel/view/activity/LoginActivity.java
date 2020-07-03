@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 
+import com.aqiang.common.router.RouterManager;
+import com.aqiang.common.router.RouterPath;
 import com.aqiang.core.view.BaseActivity;
 import com.aqiang.core.viewmodel.BaseViewModel;
 import com.aqiang.net.BaseReposenEntity;
@@ -61,9 +63,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, UserViewMo
             @Override
             public void onChanged(@Nullable BaseReposenEntity<UserEntity> userEntityBaseReposenEntity) {
                 if(userEntityBaseReposenEntity.getCode() == 200){
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    RouterManager.getInstance().router(RouterPath.MAIN_ACTIVITY);
                 }else {
                     showToast("失败");
                 }

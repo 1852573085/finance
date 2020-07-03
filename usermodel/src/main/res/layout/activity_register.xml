@@ -24,7 +24,7 @@
             app:leftIcon="@drawable/fanhui"
             app:title="用户注册"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.aqiang.common.wiget.TitleBar>
+            android:layout_height="50dp"></com.aqiang.common.wiget.TitleBar>
         <TextView
             android:layout_margin="15dp"
             android:layout_gravity="center"

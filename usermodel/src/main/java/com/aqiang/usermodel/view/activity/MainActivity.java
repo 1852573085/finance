@@ -1,14 +1,13 @@
 package com.aqiang.usermodel.view.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.aqiang.common.router.RouterPath;
 import com.aqiang.core.view.BaseActivity;
-import com.aqiang.core.viewmodel.BaseViewModel;
 import com.aqiang.usermodel.R;
-import com.aqiang.usermodel.databinding.ActivityMainBinding;
+import com.aqiang.usermodel.databinding.ActivityMainloginBinding;
 import com.aqiang.usermodel.viewmodel.UserViewModel;
 
 import java.util.HashMap;
@@ -17,12 +16,12 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.tencent.qq.QQ;
-
-public class MainActivity extends BaseActivity<ActivityMainBinding, UserViewModel> {
+@Route(path = RouterPath.USER_ACTIVITY)
+public class MainActivity extends BaseActivity<ActivityMainloginBinding, UserViewModel> {
 
     @Override
     protected int bindLayout() {
-        return R.layout.activity_main;
+        return R.layout.activity_mainlogin;
     }
 
     @Override

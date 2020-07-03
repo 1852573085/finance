@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone"></TextView>
         <Button
+            android:id="@+id/bt_header_login"
             android:background="@drawable/btn_border_background"
             android:layout_gravity="center"
             style="@style/normalTxtStyle"
