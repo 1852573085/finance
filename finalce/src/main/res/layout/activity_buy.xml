@@ -1,9 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.BuyActivity">
+    <ScrollView
+        android:layout_weight="10"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.aqiang.common.wiget.TitleBar
+                app:title="立即投资"
+                app:leftIcon="@drawable/fanhui"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
 
-</android.support.constraint.ConstraintLayout>
+            </com.aqiang.common.wiget.TitleBar>
+            <TextView
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="项目可投资金额"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textColor="@color/orange"
+                android:layout_marginTop="10dp"
+                android:textSize="30sp"
+                android:text="7158800.00"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:layout_marginTop="30dp"
+                android:background="@color/lightgray"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:text="最低买入:10元"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="年化收益率:8.8%"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="买入金额"
+                    android:id="@+id/tv_act_buy"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="8000"
+                    android:textSize="20sp"
+                    android:textColor="@color/orange"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/tv_act_buy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:text="元"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <TextView
+                android:background="@color/lightgray"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textSize="30sp"
+                android:gravity="center"
+                android:text="XX理财产品1号"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <RatingBar
+                style="@style/RatingBarStyle"
+                android:layout_marginTop="30dp"
+                android:id="@+id/rating_act_buy"
+                android:numStars="5"
+                android:rating="4"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <SeekBar
+                android:layout_marginTop="30dp"
+                android:progress="81"
+                style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:text="投资有风险"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:background="@drawable/bt_back_all"
+                    android:text="全部"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:background="@drawable/bt_back_huo"
+                    android:layout_marginLeft="10dp"
+                    android:text="热度"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:background="@color/lightgray"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/yonghu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="哈哈"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:background="@drawable/tv_back_mine"
+                    android:textColor="@color/white"
+                    android:text="持有"
+                    android:gravity="center"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="嗯嗯嗯嗯嗯
+            啊啊啊啊啊啊啊啊啊啊啊艾尔啊啊嗯嗯嗯嗯哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈好啊"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="20dp"
+                android:background="@color/lightgray"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/yonghu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="哈哈"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:background="@drawable/tv_back_mine"
+                    android:textColor="@color/white"
+                    android:text="持有"
+                    android:gravity="center"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="嗯嗯嗯嗯嗯
+            啊啊啊啊啊啊啊啊啊啊啊艾尔啊啊嗯嗯嗯嗯哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈好啊"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="20dp"
+                android:background="@color/lightgray"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/yonghu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="哈哈"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:background="@drawable/tv_back_mine"
+                    android:textColor="@color/white"
+                    android:text="持有"
+                    android:gravity="center"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="嗯嗯嗯嗯嗯
+            啊啊啊啊啊啊啊啊啊啊啊艾尔啊啊嗯嗯嗯嗯哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈好啊"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="20dp"
+                android:background="@color/lightgray"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/yonghu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="哈哈"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:background="@drawable/tv_back_mine"
+                    android:textColor="@color/white"
+                    android:text="持有"
+                    android:gravity="center"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="嗯嗯嗯嗯嗯
+            啊啊啊啊啊啊啊啊啊啊啊艾尔啊啊嗯嗯嗯嗯哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈好啊"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="20dp"
+                android:background="@color/lightgray"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+        </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <Button
+            android:textColor="@color/white"
+            android:background="@color/red"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/bt_act_buy_sure"
+            android:text="确定投资"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+        <Button
+            android:textColor="@color/white"
+            android:layout_marginRight="10dp"
+            android:background="@color/blue"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/bt_act_buy_sure"
+            android:text="我要投资"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</LinearLayout>
