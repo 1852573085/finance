@@ -129,6 +129,7 @@
             android:layout_width="1dp"
             android:layout_height="match_parent" />
         <TextView
+            android:id="@+id/tv_fragment_account_manager"
             android:layout_weight="1"
             android:gravity="center"
             android:drawableTop="@drawable/ic_action_acc"

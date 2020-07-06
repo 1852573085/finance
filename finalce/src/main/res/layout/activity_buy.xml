@@ -99,12 +99,10 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <SeekBar
-                android:layout_marginTop="30dp"
-                android:progress="81"
-                style="@android:style/Widget.Holo.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+           <com.aqiang.common.wiget.ProgressView
+               app:ProProgress="81"
+               android:layout_width="match_parent"
+               android:layout_height="50dp" />
             <TextView
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"
@@ -276,12 +274,13 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/bt_act_buy_pay"
             android:textColor="@color/white"
             android:layout_marginRight="10dp"
             android:background="@color/blue"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/bt_act_buy_sure"
-            android:text="我要投资"
+            android:text="我要充值"
             android:layout_width="100dp"
             android:layout_height="wrap_content" />
     </RelativeLayout>

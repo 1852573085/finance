@@ -13,6 +13,7 @@ android {
         targetSdkVersion proInfo.targetSdkVersion
         versionCode proInfo.versionCode
         versionName proInfo.versionName
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -42,6 +43,7 @@ dependencies {
     implementation project(path: ':common')
     implementation project(path: ':core')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:multidex:1.0.3'
     if(accountModelIsRun.toBoolean()){
         implementation project(path: ':account')
     }

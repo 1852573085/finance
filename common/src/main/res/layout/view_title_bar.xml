@@ -23,5 +23,5 @@
         android:id="@+id/view_titlebar_right"
         style="@style/titlebarTxtStyle"
         android:layout_alignParentRight="true"
-        android:layout_gravity="center"></TextView>
+        android:gravity="center"></TextView>
 </RelativeLayout>

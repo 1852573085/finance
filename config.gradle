@@ -23,7 +23,8 @@ ext{
             room:"1.0.0",
             SmartRefreshLayout:"1.1.0",
             arouter:"1.5.0",
-            arouter_compiler:"1.2.2"
+            arouter_compiler:"1.2.2",
+            zxing:"2.2"
     ]
 
     dependencies=[
@@ -42,7 +43,8 @@ ext{
             SmartRefreshLayout:"com.scwang.smartrefresh:SmartRefreshLayout:$dependenciesVersion.SmartRefreshLayout",
             SmartRefreshHeader:"com.scwang.smartrefresh:SmartRefreshHeader:$dependenciesVersion.SmartRefreshLayout",
             arouter:"com.alibaba:arouter-api:$dependenciesVersion.arouter",
-            arouter_compiler:"com.alibaba:arouter-compiler:$dependenciesVersion.arouter_compiler"
+            arouter_compiler:"com.alibaba:arouter-compiler:$dependenciesVersion.arouter_compiler",
+            zxing:"cn.yipianfengye.android:zxing-library:$dependenciesVersion.zxing"
     ]
 
     url=[

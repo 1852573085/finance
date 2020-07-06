@@ -23,4 +23,11 @@
     <declare-styleable name="BubbleView">
         <attr name="bubbleText" format="string"></attr>
     </declare-styleable>
+
+    <declare-styleable name="ProgressView">
+        <attr name="backColor" format="color"></attr>
+        <attr name="proColor" format="color"></attr>
+        <attr name="proTextColor" format="color"></attr>
+        <attr name="ProProgress" format="float"></attr>
+    </declare-styleable>
 </resources>

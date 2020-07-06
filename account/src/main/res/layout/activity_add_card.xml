@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.AddCardActivity">
+    <com.aqiang.common.wiget.TitleBar
+        android:id="@+id/title_act_add_card"
+        app:title="支付方式"
+        app:rightIcon="@drawable/ic_action_code"
+        app:leftIcon="@drawable/fanhui"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"></com.aqiang.common.wiget.TitleBar>
+    <ImageView
+        android:src="@drawable/yl"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+    <Spinner
+        android:id="@+id/sp_act_add_card"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></Spinner>
+    <EditText
+        android:id="@+id/et_add_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_marginTop="200dp"
+        app:backgroundTint="@color/blue"
+        android:id="@+id/bt_act_add_card"
+        android:layout_gravity="center"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+</LinearLayout>

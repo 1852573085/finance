@@ -65,4 +65,5 @@ dependencies {
     annotationProcessor libInfo.arouter_compiler
     implementation project(path: ':storage')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation (name: 'alipaySdk-15.7.4', ext: 'aar')
 }

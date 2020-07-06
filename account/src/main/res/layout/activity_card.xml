@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.aqiang.common.wiget.TitleBar
+        app:title="支付方式"
+        app:leftIcon="@drawable/fanhui"
+        app:rightText="编辑"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"></com.aqiang.common.wiget.TitleBar>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_act_card"
+        android:layout_weight="10"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </android.support.v7.widget.RecyclerView>
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <CheckBox
+            android:id="@+id/box_act_card_all"
+            android:text="全选"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_act_card_del"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="删除"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/bt_act_card_add"
+        android:layout_marginTop="-150dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="20dp"
+        app:backgroundTint="@color/blue"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+</LinearLayout>
