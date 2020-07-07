@@ -22,10 +22,36 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></Spinner>
-    <EditText
-        android:id="@+id/et_add_card"
+    <LinearLayout
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+        <com.aqiang.common.wiget.CodeEditText
+            android:theme="@style/CodeEdit"
+            android:id="@+id/et_01"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content" />
+        <com.aqiang.common.wiget.CodeEditText
+            android:id="@+id/et_02"
+            android:theme="@style/CodeEdit"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content" />
+        <com.aqiang.common.wiget.CodeEditText
+            android:id="@+id/et_03"
+            android:theme="@style/CodeEdit"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content" />
+        <com.aqiang.common.wiget.CodeEditText
+            android:id="@+id/et_04"
+            android:layout_width="70dp"
+            android:theme="@style/CodeEdit"
+            android:layout_height="wrap_content" />
+        <com.aqiang.common.wiget.CodeEditText
+            android:id="@+id/et_05"
+            android:theme="@style/CodeEdit"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
     <android.support.design.widget.FloatingActionButton
         android:layout_marginTop="200dp"
         app:backgroundTint="@color/blue"
